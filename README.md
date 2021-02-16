@@ -16,4 +16,4 @@ To use this version, you need to create a .env file and define a secret string.
 ## secret-v2
 In this version the password is hashed using md5 function. The [md5](https://www.npmjs.com/package/md5) package was used to hash passwords.
 
-### Usage
+## secret-v3
