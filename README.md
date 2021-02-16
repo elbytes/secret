@@ -12,3 +12,7 @@ To use this version, you need to create a .env file and define a secret string.
      vim .env
      
      SECRET=<putsecretstringhere>
+
+## secret-v2
+
+### Usage
