@@ -17,3 +17,8 @@ To use this version, you need to create a .env file and define a secret string.
 In this version the password is hashed using md5 function. The [md5](https://www.npmjs.com/package/md5) package was used to hash passwords.
 
 ## secret-v3
+In this version the md5 was replaced by [bcypt](https://www.npmjs.com/package/bcrypt) package to hash the password.
+salt rounds have been set to 10.
+
+          const saltRounds = 10;  
+
