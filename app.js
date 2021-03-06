@@ -29,7 +29,8 @@ mongoose.set('useCreateIndex', true); //to resolve collection.ensureIndex deprec
 const userSchema = new mongoose.Schema({
     email: String,
     password: String,
-    googleId: String
+    googleId: String, 
+    secret: String
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -93,11 +94,34 @@ app.get('/secrets', (req, res)=>{
     }
 });
 
+app.get('/submit', (req, res)=>{
+    if(req.isAuthenticated()){
+        res.render('submit');
+    } else{
+        res.redirect('/login');
+    }
+});
+
+app.post('/submit', (req, res)=>{
+    const secret = req.body.secret
+    User.findById(req.user.id, (err, foundUser)=>{
+        if(err){
+            console.log(err);
+        }else{
+            if(foundUser){
+                foundUser.secret = secret
+                foundUser.save()
+                res.redirect('/secrets')
+            }
+        }
+    })
+})
+
 app.post('/register', (req, res)=>{
     //register method comes from passportLocalMongoose
    User.register({username: req.body.username}, req.body.password, (err, user)=>{
        if(err){
-           console.log(err);
+           console.log(err); 
            res.redirect('/register');
        } else{
            passport.authenticate('local')(req, res, ()=>{
