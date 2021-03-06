@@ -87,11 +87,15 @@ app.get('/register', (req, res)=>{
 })
 
 app.get('/secrets', (req, res)=>{
-    if(req.isAuthenticated()){
-        res.render('secrets');
-    } else{
-        res.redirect('/login');
-    }
+   User.find({"secret": {$ne:null}}, (err, foundUser)=>{
+       if(err){
+           console.log(err);
+       } else{
+           if(foundUser){
+               res.render('secrets', {usersWithSecrets: foundUser})
+           }
+       }
+   })
 });
 
 app.get('/submit', (req, res)=>{
