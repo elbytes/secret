@@ -22,3 +22,6 @@ salt rounds have been set to 10.
 
           const saltRounds = 10;  
 
+
+## secret-v4
+In this version I use passportjs to manage cookies and sessions
